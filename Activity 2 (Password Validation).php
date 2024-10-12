@@ -1,14 +1,23 @@
 <?php
-  $pass = ""; 
-  do {
-    echo "Please enter the password: ";
-    $input = trim(fgets(STDIN)); 
-    if ($input != "password123") {
-      echo "Incorrect password.\n";
-    } else {
-      $pass = $input;
-    }
-  } while ($pass != "password123");
+$password = "password123";
+$isValid = false;
 
-  echo "Access Granted.\n";
+do{
+  if ($_SERVER["REQUEST_METHOD"] == "POST") {
+      $inputPassword = $_POST["password"];
+
+      if ($inputPassword != $password) {
+        echo "Incorrect Password.\n";
+      }else{
+        $isValid = true;
+        echo "Access Granted.";
+      }
+  }
+} while (!$isValid);
 ?>
+
+<form method="post">
+  <label for="pass">Enter the password: </label>
+  <input type="text" id="string"name="input_str"required>
+  <button type="submit" name="submit">submit</button>
+</form>
